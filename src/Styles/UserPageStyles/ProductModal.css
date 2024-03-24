@@ -1,0 +1,84 @@
+.modal-overlay {
+  position: fixed; /* Positioned relative to the viewport */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex; /* Use flexbox for centering */
+  align-items: center; /* Vertical centering */
+  justify-content: center; /* Horizontal centering */
+  z-index: 1000; /* High z-index to ensure it's on top */
+}
+
+.modal-container {
+  position: fixed; /* Positioned relative to the viewport */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset by half the width and height of the element */
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 80%; /* Use 60% of the viewport width */
+  height: 80%;
+  z-index: 1001; /* Above the overlay */
+  overflow-y: auto; /* Allows content to scroll if it overflows */
+  display: flex;
+}
+
+.modal-close-button {
+  float: right;
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-controls button {
+  margin: 0 5px;
+}
+
+.modal-content {
+  display: flex;
+  width: 100%;
+}
+
+.image-gallery {
+  position: relative;
+  flex: 1; /* Take up half the space of the modal content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-gallery img {
+  width: 200px; /* Adjust as necessary */
+  height: 200px; /* Adjust as necessary */
+  max-height: 400px; /* Adjust as necessary */
+  max-width: 100%; /* Adjust as necessary */
+}
+
+.product-details {
+  flex: 1; /* Take up the remaining half */
+  padding: 20px; /* Adjust as necessary */
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.left {
+  left: 10px;
+}
+
+.right {
+  right: 10px;
+}

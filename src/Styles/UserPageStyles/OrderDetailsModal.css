@@ -1,0 +1,52 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 500px;
+    max-width: 90%;
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.order-info p, .total-price {
+    margin: 10px 0;
+    color: #333;
+}
+
+.cart-items {
+    border-top: 1px solid #eee;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.cart-item {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.item-details {
+    margin-left: 10px;
+}
+
+.item-details span {
+    display: block;
+    margin-bottom: 5px;
+}

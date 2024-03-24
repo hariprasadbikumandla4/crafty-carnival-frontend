@@ -1,0 +1,22 @@
+.tableHeaderStyle {
+  background-color: pink;
+  padding: 10px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.tableCellStyle {
+  padding: 10px;
+  border: 1px solid black;
+  text-align: left;
+}
+
+.oddRowStyle {
+  background-color: #f3f3f3;
+  border: 1px solid black;
+};
+
+.evenRowStyle {
+  background-color: #ffffff;
+  border: 1px solid black;
+};
