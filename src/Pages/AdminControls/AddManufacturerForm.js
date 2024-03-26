@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import "../../Styles/AdminStyles/AddManufacturerForm.css"; // Import CSS file for styling
+import "../../Styles/AdminStyles/AddManufacturerForm.css";
 
 const AddManufacturerForm = ({ onAdd, onClose }) => {
-  const [manufacturer, setManufacturer] = useState({ name: "", address: "", phone: "", email: "", website: "" });
+  const [manufacturer, setManufacturer] = useState({ manufacturerName: "", manufacturerAddress: "", manufacturerPhone: "", manufacturerEmail: "", manufacturerWebsite: "" });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onAdd(manufacturer);
-    setManufacturer({ name: "", address: "", phone: "", email: "", website: "" });
+    setManufacturer({ manufacturerName: "", manufacturerAddress: "", manufacturerPhone: "", manufacturerEmail: "", manufacturerWebsite: "" });
     onClose();
   };
 
@@ -21,8 +21,8 @@ const AddManufacturerForm = ({ onAdd, onClose }) => {
             <input
               type="text"
               id="name"
-              value={manufacturer.name}
-              onChange={(e) => setManufacturer({ ...manufacturer, name: e.target.value })}
+              value={manufacturer.manufacturerName}
+              onChange={(e) => setManufacturer({ ...manufacturer, manufacturerName: e.target.value })}
               className="form-input"
               required
             />
@@ -32,8 +32,8 @@ const AddManufacturerForm = ({ onAdd, onClose }) => {
             <input
               type="text"
               id="address"
-              value={manufacturer.address}
-              onChange={(e) => setManufacturer({ ...manufacturer, address: e.target.value })}
+              value={manufacturer.manufacturerAddress}
+              onChange={(e) => setManufacturer({ ...manufacturer, manufacturerAddress: e.target.value })}
               className="form-input"
               required
             />
@@ -43,8 +43,8 @@ const AddManufacturerForm = ({ onAdd, onClose }) => {
             <input
               type="text"
               id="phone"
-              value={manufacturer.phone}
-              onChange={(e) => setManufacturer({ ...manufacturer, phone: e.target.value })}
+              value={manufacturer.manufacturerPhone}
+              onChange={(e) => setManufacturer({ ...manufacturer, manufacturerPhone: e.target.value })}
               className="form-input"
             />
           </div>
@@ -53,8 +53,8 @@ const AddManufacturerForm = ({ onAdd, onClose }) => {
             <input
               type="email"
               id="email"
-              value={manufacturer.email}
-              onChange={(e) => setManufacturer({ ...manufacturer, email: e.target.value })}
+              value={manufacturer.manufacturerEmail}
+              onChange={(e) => setManufacturer({ ...manufacturer, manufacturerEmail: e.target.value })}
               className="form-input"
             />
           </div>
@@ -63,8 +63,8 @@ const AddManufacturerForm = ({ onAdd, onClose }) => {
             <input
               type="text"
               id="website"
-              value={manufacturer.website}
-              onChange={(e) => setManufacturer({ ...manufacturer, website: e.target.value })}
+              value={manufacturer.manufacturerWebsite}
+              onChange={(e) => setManufacturer({ ...manufacturer, manufacturerWebsite: e.target.value })}
               className="form-input"
             />
           </div>

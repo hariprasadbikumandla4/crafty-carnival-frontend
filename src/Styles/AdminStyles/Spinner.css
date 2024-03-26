@@ -3,6 +3,7 @@
   border: 10px solid rgba(0, 0, 0, 0.1);
   border-left-color: #3498db;
   border-radius: 70%;
+  background-color: darkgoldenrod;
   width: 120px;
   height: 120px;
   animation: spin 1s linear infinite;

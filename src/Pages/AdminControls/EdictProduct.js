@@ -4,15 +4,15 @@ import AllCategories from "./AllCategories";
 import AllManufacturers from "./AllManufacturers";
 
 const EditProduct = ({ product, onClose, authIdToken }) => {
-    const [productName, setProductName] = useState(product.name);
-    const [productDescription, setProductDescription] = useState(product.description);
-    const [productPrice, setProductPrice] = useState(product.price);
-    const [productQuantity, setProductQuantity] = useState(product.quantityAvailable);
-    const [selectedManufacturer, setSelectedManufacturer] = useState(product.manufacturer);
-    const [selectedCategory, setSelectedCategory] = useState(product.category);
+    const [productName, setProductName] = useState(product.productName);
+    const [productDescription, setProductDescription] = useState(product.productDescription);
+    const [productPrice, setProductPrice] = useState(product.productPrice);
+    const [productQuantity, setProductQuantity] = useState(product.productQuantityAvailable);
+    const [selectedManufacturer, setSelectedManufacturer] = useState(product.productManufacturer);
+    const [selectedCategory, setSelectedCategory] = useState(product.productCategory);
     const [allCategories, setAllCategories] = useState([]);
     const [allManufacturers, setAllManufacturers] = useState([]);
-    const [productModel, setProductModel] = useState(product.model);
+    const [productModel, setProductModel] = useState(product.productModel);
     const [imageUrls, setImageUrls] = useState(product.imageUrls);
     const [imageUrlInput, setImageUrlInput] = useState('');
 
@@ -45,14 +45,14 @@ const EditProduct = ({ product, onClose, authIdToken }) => {
                 },
                 body: JSON.stringify({
                     id:product.id,
-                    name: productName,
-                    description: productDescription,
-                    price: productPrice,
-                    quantityAvailable: productQuantity,
-                    manufacturer: selectedManufacturer,
-                    category: selectedCategory,
-                    model: productModel,
-                    imageUrls: imageUrls
+                    productName: productName,
+                    productDescription: productDescription,
+                    productPrice: parseFloat(productPrice).toFixed(2),
+                    productQuantityAvailable: parseInt(productQuantity), 
+                    productManufacturer: selectedManufacturer,
+                    productCategory: selectedCategory, 
+                    productModel: productModel,
+                    imageUrls: imageUrls.filter(url => url.trim() !== "")
                 })
             });
 
@@ -117,7 +117,7 @@ const EditProduct = ({ product, onClose, authIdToken }) => {
                     <select value={selectedManufacturer} onChange={(e) => setSelectedManufacturer(e.target.value)}>
                         <option value="">Select a Manufacturer</option>
                         {allManufacturers?allManufacturers.map(manufacturer => (
-                            <option key={manufacturer.id} value={manufacturer.name}>{manufacturer.name}</option>
+                            <option key={manufacturer.id} value={manufacturer.manufacturerName}>{manufacturer.manufacturerName}</option>
                         )):"No Manufacturers found."}
                     </select>
                 </div>
@@ -126,7 +126,7 @@ const EditProduct = ({ product, onClose, authIdToken }) => {
                     <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
                         <option value="">Select a Category</option>
                         {allCategories?allCategories.map(category => (
-                            <option key={category.id} value={category.name}>{category.name}</option>
+                            <option key={category.id} value={category.categoryName}>{category.categoryName}</option>
                         )):"No Categories found."}
                     </select>
                 </div>

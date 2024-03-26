@@ -110,7 +110,7 @@ const OrdersHome = ({ userEmail, authIdToken }) => {
                             <tr key={order.id}>
                                 <td style={tableCellStyle}>{order.id}</td>
                                 <td style={tableCellStyle}>{order.status}</td>
-                                <td style={tableCellStyle}>{order.paymentId ? 'SUCCESS' : 'NA'}</td>
+                                <td style={tableCellStyle}>{order.orderPaymentId ? 'SUCCESS' : 'NA'}</td>
                                 <td style={tableCellStyle}>{order.orderAddress}</td>
                                 <td style={tableCellStyle}>{order.orderedOn ? order.orderedOn.slice(0, 10) : 'NA'} (UTC)</td>
                                 <td style={tableCellStyle}>${order.orderTotalPrice}</td>
@@ -133,22 +133,22 @@ const OrdersHome = ({ userEmail, authIdToken }) => {
                                 <p ><strong>Status:</strong></p>
                                 <OrderStatus currentStatus={selectedOrder.status} />
                             </div >
-                            <p style={{marginTop:'40px'}}><strong>Payment Status:</strong> {selectedOrder.paymentId ? 'SUCCESS' : 'NA'}</p>
+                            <p style={{marginTop:'40px'}}><strong>Payment Status:</strong> {selectedOrder.orderPaymentId ? `SUCCESS(Id: ${selectedOrder.orderPaymentId})` : 'NA'}</p>
                             <p><strong>Delivery Address:</strong> {selectedOrder.orderAddress}</p>
                         </div>
                         <div className="cart-items">
                             {cartItems? cartItems.map((item, index) => (
                             <div key={index} className="cart-item">
                                 <div className="item-image">
-                                <img src={item.product.imageUrls} style={{ width: '100px', height: '100px' }} alt="Item" />
+                                <img src={item.carnivalProducts.imageUrls} style={{ width: '100px', height: '100px' }} alt="Item" />
                                 </div>
                                 <div className="item-details">
                                 <div className="item-info">
-                                    <span className="item-name" style={{ margin: '5px' }}>{item.product.name}</span>
+                                    <span className="item-name" style={{ margin: '5px' }}>{item.carnivalProducts.productName}</span>
                                 </div>
                                 <div className="item-quantity">
-                                    <span>Quantity: {item.quantity}x</span>${item.product.price}
-                                    <p>Total Price: <strong>${item.product.price * item.quantity}</strong></p>
+                                    <span>Quantity: {item.cartItemQuantity}x</span>${item.carnivalProducts.productPrice}
+                                    <p>Total Price: <strong>${item.carnivalProducts.productPrice * item.cartItemQuantity}</strong></p>
                                 </div>
                                 </div>
                             </div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ManageCategories from "./ManageCategories";
 import ManageManufacturers from "./ManageManufacturers";
 
-const ManageInventories = ({ userEmail, authIdToken }) => {
+const AdminInventoriesPage = ({ userEmail, authIdToken }) => {
     const [mode, setMode] = useState('categories'); // Initial mode is 'categories'
 
     return (
@@ -33,4 +33,4 @@ const ManageInventories = ({ userEmail, authIdToken }) => {
     );
 };
 
-export default ManageInventories;
+export default AdminInventoriesPage;

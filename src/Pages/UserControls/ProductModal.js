@@ -36,15 +36,15 @@ const ProductModal = ({
             <button className="arrow left" onClick={previousImage}>&lt;</button>
             <img 
               src={product.imageUrls[currentImageIndex] || {NoImage}}
-              alt={`${product.name} image ${currentImageIndex + 1}`}
+              alt={`${product.productName} image ${currentImageIndex + 1}`}
             />
             <button className="arrow right" onClick={nextImage}>&gt;</button>
           </div>
           <div className="product-details">
-            <h3>{product.name}</h3>
-            <p><strong>Description:</strong> {product.description} </p> 
-            <p>Sold by <strong>{product.manufacturer}</strong></p>
-            <p>Price: ${product.price}, Available: <strong>{product.quantityAvailable}</strong></p>
+            <h3>{product.productName}</h3>
+            <p><strong>Description:</strong> {product.productDescription} </p> 
+            <p>Sold by <strong>{product.productManufacturer}</strong></p>
+            <p>Price: ${product.productPrice}, Available: <strong>{product.productQuantityAvailable}</strong></p>
             {cart[product.id] > 0 ? (
               <div className="quantity-controls">
                 <button onClick={() => handleDecreaseQuantity(product.id)}>-</button>

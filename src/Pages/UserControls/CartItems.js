@@ -33,7 +33,7 @@ const CartItems = ({ userEmail, userName, userPhone, authIdToken }) => {
       if (response.ok) {
         const responseData = await response.json();
         setUserCartItems(responseData);
-        const total = responseData.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+        const total = responseData.reduce((acc, item) => acc + item.carnivalProducts.productPrice * item.cartItemQuantity, 0);
         setTotalCartPrice(total);
       } else {
         console.error("Error in getting cart items.");
@@ -72,14 +72,14 @@ const CartItems = ({ userEmail, userName, userPhone, authIdToken }) => {
       <div className="cart-items">
         {userCartItems.length > 0 ? userCartItems.map((item, index) => (
           <div key={index} className="cart-item">
-            <img src={item.product.imageUrls || "https://jmva.or.jp/wp-content/uploads/2018/07/noimage.png"} alt={item.product.name} className="item-image" />
-            <div className="item-details">
-              <h4 className="item-name">{item.product.name}</h4>
-              <p className="item-description">{item.product.description}</p>
+            <img src={item.carnivalProducts?.imageUrls?.[0] || "https://jmva.or.jp/wp-content/uploads/2018/07/noimage.png"} alt={item.product?.productName} className="item-image" />
+              <div className="item-details">
+              <h4 className="item-name">{item.carnivalProducts?.productName}</h4>
+              <p className="item-description">{item.carnivalProducts?.productDescription}</p>
               <div className="quantity-price">
-                <span>Quantity: {item.quantity}</span>
-                <span>Price: ${item.product.price.toFixed(2)}</span>
-                <span>Total: ${(item.product.price * item.quantity).toFixed(2)}</span>
+                <span>Quantity: {item.cartItemQuantity}</span>
+                <span>Price: ${item.carnivalProducts?.productPrice.toFixed(2)}</span>
+                <span>Total: ${(item.carnivalProducts?.productPrice * item.cartItemQuantity.toFixed(2))}</span>
               </div>
             </div>
           </div>

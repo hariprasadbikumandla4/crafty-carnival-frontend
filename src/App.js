@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { Amplify, Auth } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import config from './amplifyconfiguration.json';
+import '@aws-amplify/ui-react/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css"
 import Logo from './Styles/logo.png'
@@ -58,9 +59,9 @@ function App({ signOut, user }) {
         <div className="navigation">
           <ul>
             <li><Link to="/">Home</Link></li>
+            <li><Link to="/cart">Bucket</Link></li>
             <li><Link to="/orders">Orders</Link></li>
             <li><Link to="/profile">Profile</Link></li>
-            <li><Link to="/cart">Cart</Link></li>
             {AdminUsers.usersList.includes(userEmail) && (
               <li><Link to="/admin">Admin</Link></li>
             )}

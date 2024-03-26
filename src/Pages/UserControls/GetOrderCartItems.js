@@ -3,7 +3,7 @@ import configDetails from "../../ConfigureDetails/redirectConfig";
 async function getOrderCartItems(cartItemIds, authIdToken){
     try{
         const cartItemsIdsString = cartItemIds.join(','); 
-        const api = `${configDetails.baseUrl}/getordercartitems?cartItemsIds=${cartItemsIdsString}`;
+        const api = `${configDetails.baseUrl}${configDetails.getOrderCartItems}?cartItemsIds=${cartItemsIdsString}`;
         const response = await fetch(api, {
             method: 'GET',
             headers: {

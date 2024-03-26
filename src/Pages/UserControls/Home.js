@@ -8,7 +8,9 @@ import NoImage from '../../Styles/noimage.png'
 const Home = ({ userEmail, authIdToken }) => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState({});
+  const [manufacturers, setManufacturers] = useState({});
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedManufacturers, setSelectedManufacturers] = useState([]);
   const [cart, setCart] = useState({});
   const [existingCart, setExistingCart] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -32,10 +34,13 @@ const Home = ({ userEmail, authIdToken }) => {
         setProducts(fetchedProducts);
 
         const categoryObj = {};
+        const manufacturerObj = {};
         fetchedProducts.forEach((product) => {
-          categoryObj[product.category] = true;
+          categoryObj[product.productCategory] = true;
+          manufacturerObj[product.productManufacturer] = true;
         });
         setCategories(categoryObj);
+        setManufacturers(manufacturerObj);
       } else {
         console.error('Failed to fetch products');
       }
@@ -107,8 +112,8 @@ const Home = ({ userEmail, authIdToken }) => {
       
       const product = products.find((product) => product.id === productId);
       
-      if (product && product.quantityAvailable < quantity) {
-        alert(`${product.quantityAvailable} in stock.`);
+      if (product && product.productQuantityAvailable < quantity) {
+        alert(`${product.productQuantityAvailable} in stock.`);
         return; 
       }
       
@@ -186,7 +191,9 @@ const Home = ({ userEmail, authIdToken }) => {
 
   const getFilteredProducts = () => {
     return products.filter((product) => {
-      return selectedCategories.length === 0 || selectedCategories.includes(product.category);
+      const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(product.productCategory);
+      const manufacturerMatch = selectedManufacturers.length === 0 || selectedManufacturers.includes(product.productManufacturer);
+      return categoryMatch && manufacturerMatch;
     });
   };
 
@@ -194,6 +201,11 @@ const Home = ({ userEmail, authIdToken }) => {
       fetchProducts();
   }, []); 
 
+  const handleManufacturerChange = (manufacturer) => {
+    setSelectedManufacturers((prev) =>
+      prev.includes(manufacturer) ? prev.filter((man) => man !== manufacturer) : [...prev, manufacturer]
+    );
+  };
 
   if (isLoading) {
     return <div className="loading-container">
@@ -204,47 +216,74 @@ const Home = ({ userEmail, authIdToken }) => {
 
   return (
     <div className="main-container" style={{ display: 'flex' }}>
-      <aside className="filters" style={{ width: '20%', backgroundColor: 'lightgrey', padding: '20px', borderRadius: '10px' }}>
-        <button onClick={fetchProducts} style={{width:'100%', backgroundColor:'green', marginBottom: '10px'}}>Fetch Products</button>
-        <h4> Categories</h4>
-        {Object.keys(categories).map((category) => (
-          <div key={category} style={{ margin: '10px 0' }}>
-            <input
-              type="checkbox"
-              id={`cat-${category}`}
-              checked={selectedCategories.includes(category)}
-              onChange={() => handleCategoryChange(category)}
-              style={{ marginRight: '5px' }} 
-            />
-            <label htmlFor={`cat-${category}`}>{category}</label>
+      <aside className="filters" style={{ width: '15%', backgroundColor: 'lightgrey', padding: '10px', borderRadius: '10px' }}>
+        <button onClick={fetchProducts} style={{width:'100%', marginBottom: '10px'}}>Fetch Products</button>
+        <div style={{border: '1px solid', padding: '10px', borderRadius: '5px', margin:'5px' }}>
+            <strong>By Categories</strong>
+            {Object.keys(categories).map((category) => (
+              <div key={category} style={{ display: 'inline-block', marginRight: '10px' }}>
+                <input
+                  type="checkbox"
+                  id={`cat-${category}`}
+                  checked={selectedCategories.includes(category)}
+                  onChange={() => setSelectedCategories((prev) =>
+                    prev.includes(category) ? prev.filter((cat) => cat !== category) : [...prev, category])}
+                />
+                <label htmlFor={`cat-${category}`}>{category}</label>
+              </div>
+            ))}
           </div>
-        ))}
+        <div style={{border: '1px solid', padding: '10px', borderRadius: '5px' }}>
+          <strong> By Manufacturers</strong>
+          {Object.keys(manufacturers).map((manufacturer) => (
+            <div key={manufacturer}>
+              <input
+                type="checkbox"
+                id={`man-${manufacturer}`}
+                checked={selectedManufacturers.includes(manufacturer)}
+                onChange={() => handleManufacturerChange(manufacturer)}
+              />
+              <label htmlFor={`man-${manufacturer}`}>{manufacturer}</label>
+            </div>
+          ))}
+        </div>
       </aside>
 
       <div className="product-container" style={{ flex: 1, padding: '20px', margin: '0 20px' }}>
-        {getFilteredProducts().map((product, index) => (
-          <div key={index} className="product-item" style={{ marginBottom: '20px' }}>
-            {product.imageUrls ? 
-              (<img src={product.imageUrls} alt="Product" style={{ width: '200px', height: '200px' }} />) : (
-              <img src={NoImage} alt="No Image" style={{ width: '200px', height: '200px' }} />
-            )}
-            <h3 onClick={() => showProductDetails(product)} style={{ cursor: 'pointer' }}>
-              {product.name}
-            </h3>
-            <p><strong>Description:</strong> {product.description}</p>
-            <p>Price: ${product.price}</p>
-            {cart[product.id] > 0 ? (
-              <div className="quantity-controls">
-                <button className="small-button" onClick={() => handleDecreaseQuantity(product.id)}>-</button>
-                <span>{cart[product.id]}</span>
-                <button className="small-button" onClick={() => handleIncreaseQuantity(product.id)}>+</button>
-              </div>
-            ) : (
-              <button className="add-to-cart-button" onClick={() => handleAddToCart(product.id)}>Add to Cart</button>
-            )}
-          </div>
-        ))}
-      </div>
+      {/* Use a variable to hold the filtered products to avoid calling getFilteredProducts multiple times */}
+      {(() => {
+        const filteredProducts = getFilteredProducts();
+        if (filteredProducts.length === 0) {
+          // Display "No Products Found" message if no products are available after filtering
+          return <div style={{textAlign:'center'}}>No Products Found.</div>;
+        } else {
+          // Display products
+          return filteredProducts.map((product, index) => (
+            <div key={index} className="product-item" style={{ marginBottom: '20px' }}>
+              {/* Check if product has imageUrls, otherwise display NoImage */}
+              <img
+                src={product.imageUrls?product.imageUrls: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'}
+                alt={product.productName}
+                style={{ width: '200px', height: '200px' }}
+              />
+              <h3 onClick={() => showProductDetails(product)} style={{ cursor: 'pointer' }}>
+                {product.productName}
+              </h3>
+              <p>Price: ${product.productPrice}</p>
+              {cart[product.id] > 0 ? (
+                <div className="quantity-controls">
+                  <button className="small-button" onClick={() => handleDecreaseQuantity(product.id)}>-</button>
+                  <span>{cart[product.id]}</span>
+                  <button className="small-button" onClick={() => handleIncreaseQuantity(product.id)}>+</button>
+                </div>
+              ) : (
+                <button className="add-to-cart-button" onClick={() => handleAddToCart(product.id)}>Add to Cart</button>
+              )}
+            </div>
+          ));
+        }
+      })()}
+    </div>
 
       <ProductModal
         product={selectedProduct}

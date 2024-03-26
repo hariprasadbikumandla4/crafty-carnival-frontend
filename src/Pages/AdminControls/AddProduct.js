@@ -9,10 +9,8 @@ const AddProduct = ({ onClose, authIdToken }) => {
     const [productDescription, setProductDescription] = useState("");
     const [productPrice, setProductPrice] = useState(0); 
     const [productQuantity, setProductQuantity] = useState(0);
-    const [productGender, setProductGender] = useState("");
     const [selectedManufacturer, setSelectedManufacturer] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
-    const [selectedSubcategory, setSelectedSubcategory] = useState("");
     const [allCategories, setAllCategories] = useState([]);
     const [allManufacturers, setAllManufacturers] = useState([]);
     const [productModel, setProductModel] = useState("");
@@ -20,7 +18,7 @@ const AddProduct = ({ onClose, authIdToken }) => {
     const [imageUrlInput, setImageUrlInput] = useState('');
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchCateManufacturer = async () => {
             try {
                 const categories = await AllCategories(authIdToken);
                 const manufacturers = await AllManufacturers(authIdToken);
@@ -32,7 +30,7 @@ const AddProduct = ({ onClose, authIdToken }) => {
             }
         };
 
-        fetchData();
+        fetchCateManufacturer();
     }, []);
 
     const handleAddProduct = async () => {
@@ -45,15 +43,13 @@ const AddProduct = ({ onClose, authIdToken }) => {
                     'Authorization': authIdToken
                 },
                 body: JSON.stringify({
-                    name: productName,
-                    description: productDescription,
-                    price: parseFloat(productPrice).toFixed(2), 
-                    quantityAvailable: parseInt(productQuantity), 
-                    gender: productGender,
-                    manufacturer: selectedManufacturer,
-                    category: selectedCategory, 
-                    subcategory: selectedSubcategory, 
-                    model: productModel,
+                    productName: productName,
+                    productdescription: productDescription,
+                    productPrice: parseFloat(productPrice).toFixed(2),
+                    productQuantityAvailable: parseInt(productQuantity), 
+                    productManufacturer: selectedManufacturer,
+                    productCategory: selectedCategory, 
+                    productModel: productModel,
                     imageUrls: imageUrls.filter(url => url.trim() !== "")
                 })
             });
@@ -92,7 +88,7 @@ const AddProduct = ({ onClose, authIdToken }) => {
                 <span className="close" onClick={onClose}>&times;</span>
                 <h2 style={{ backgroundColor: '#6495ED', color: 'white', textAlign: 'center', padding: '5px', marginBottom: '10px', borderRadius: '5px' }}>Add New Product</h2>
                 <div>
-                    <label>Product Name:</label>
+                    <label>Name:</label>
                     <input type="text" value={productName} onChange={(e) => setProductName(e.target.value)} />
                 </div>
                 <div>
@@ -104,35 +100,35 @@ const AddProduct = ({ onClose, authIdToken }) => {
                     <input type="number" step={0.01} value={productPrice} onChange={handlePriceChange} />
                 </div>
                 <div>
-                    <label>Quantity Available:</label>
+                    <label>Available Count:</label>
                     <input type="number" value={productQuantity} onChange={(e) => setProductQuantity(e.target.value)} />
                 </div>
                 <div>
-                    <label>Manufacturer:</label>
+                    <label>Select Manufacturer:</label>
                     <select value={selectedManufacturer} onChange={(e) => setSelectedManufacturer(e.target.value)}>
                         <option value="">Select a Manufacturer</option>
                         {allManufacturers.map(manufacturer => (
-                            <option key={manufacturer.id} value={manufacturer.name}>{manufacturer.name}</option>
+                            <option key={manufacturer.id} value={manufacturer.manufacturerName}>{manufacturer.manufacturerName}</option>
                         ))}
                     </select>
                 </div>
                 <div>
-                    <label>Category:</label>
+                    <label>Select Category:</label>
                     <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
                         <option value="">Select a Category</option>
                         {allCategories.map(category => (
-                            <option key={category.id} value={category.name}>{category.name}</option>
+                            <option key={category.id} value={category.categoryName}>{category.categoryName}</option>
                         ))}
                     </select>
                 </div>
 
                 <div>
-                    <label>Model:</label>
+                    <label>Product Model:</label>
                     <input type="text" value={productModel} onChange={(e) => setProductModel(e.target.value)} />
                 </div>
 
                 <div>
-                    <label>Image URLs:</label>
+                    <label>Product Image URLs:</label>
                     <div>
                         {imageUrls.map((url, index) => (
                             <div key={index} style={{ display: 'flex', marginBottom: '10px' }}>
@@ -146,7 +142,7 @@ const AddProduct = ({ onClose, authIdToken }) => {
                                     }}
                                     style={{ marginRight: '10px' }}
                                 />
-                                <button onClick={() => setImageUrls(imageUrls.filter((_, i) => i !== index))}>Remove</button>
+                                <button onClick={() => setImageUrls(imageUrls.filter((_, i) => i !== index))}>Remove Image</button>
                             </div>
                         ))}
                         <input
@@ -156,7 +152,7 @@ const AddProduct = ({ onClose, authIdToken }) => {
                             value={imageUrlInput}
                             onChange={handleImageUrlInputChange}
                         />
-                        <button onClick={handleAddImageUrl}>Add</button>
+                        <button onClick={handleAddImageUrl}>Add Image URL</button>
                     </div>
                 </div>
 

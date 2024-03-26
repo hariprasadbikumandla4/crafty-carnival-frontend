@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import ManageProducts from "./ManageProducts";
-import ManageInventories from "./ManageInventories";
+import AdminProductsPage from "./AdminProductsPage";
+import AdminInventoriesPage from "./AdminInventoriesPage";
 import AdminOrdersHome from"./AdminOrdersHome"
 import AdminUsers from "../../ConfigureDetails/AdminUsers";
 
 const AdminHome = ({ userEmail, authIdToken }) => {
-  const [mode, setMode] = useState('manageOrders');
+  const [mode, setMode] = useState('adminOrdersPage');
 
   const handleModeChange = (newMode) => {
     setMode(newMode);
@@ -19,22 +19,22 @@ const AdminHome = ({ userEmail, authIdToken }) => {
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '5px' }}>
         {isAllowedUser && (
           <>
-            <button style={{ margin: '2px', width: 'auto', height: '40px' }} onClick={() => handleModeChange('manageOrders')}>
+            <button style={{ margin: '2px', width: 'auto', height: '40px' }} onClick={() => handleModeChange('adminOrdersPage')}>
               Manage Orders
             </button>
-            <button style={{ margin: '2px', width: 'auto', height: '40px' }} onClick={() => handleModeChange('manageProducts')}>
+            <button style={{ margin: '2px', width: 'auto', height: '40px' }} onClick={() => handleModeChange('adminProductsPage')}>
               Manage Products
             </button>
-            <button style={{ margin: '2px', width: 'auto', height: '40px' }} onClick={() => handleModeChange('manageInventories')}>
+            <button style={{ margin: '2px', width: 'auto', height: '40px' }} onClick={() => handleModeChange('adminInventoriesPage')}>
               Manage Inventories
             </button>
           </>
         )}
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        {mode==='manageOrders' && <AdminOrdersHome userEmail={userEmail } authIdToken={authIdToken}/>}
-        {mode==='manageProducts' && <ManageProducts userEmail={userEmail } authIdToken={authIdToken}/>}
-        {mode==='manageInventories' && <ManageInventories userEmail={userEmail } authIdToken={authIdToken}/>}
+        {mode==='adminOrdersPage' && <AdminOrdersHome userEmail={userEmail } authIdToken={authIdToken}/>}
+        {mode==='adminProductsPage' && <AdminProductsPage userEmail={userEmail } authIdToken={authIdToken}/>}
+        {mode==='adminInventoriesPage' && <AdminInventoriesPage userEmail={userEmail } authIdToken={authIdToken}/>}
       </div>
     </div>
   );

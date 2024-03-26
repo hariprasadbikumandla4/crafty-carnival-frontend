@@ -171,11 +171,11 @@ const ManageManufacturers = ({ userEmail, authIdToken }) => {
         <tbody>
           {manufacturers          .map(manufacturer => (
             <tr key={manufacturer.id}>
-              <td>{manufacturer.name}</td>
-              <td>{manufacturer.address}</td>
-              <td>{manufacturer.phone}</td>
-              <td>{manufacturer.email}</td>
-              <td>{manufacturer.website}</td>
+              <td>{manufacturer.manufacturerName}</td>
+              <td>{manufacturer.manufacturerAddress}</td>
+              <td>{manufacturer.manufacturerPhone}</td>
+              <td>{manufacturer.manufacturerEmail}</td>
+              <td>{manufacturer.manufacturerWebsite}</td>
               <td>
                 <button style={{marginRight:'20px'}} className="btn btn-sm btn-primary mr-2" onClick={() => handleEditManufacturer(manufacturer)}>Edit</button>
                 <button className="btn btn-sm btn-danger" onClick={() => handleDeleteManufacturer(manufacturer.id)}>Delete</button>

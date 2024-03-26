@@ -109,7 +109,7 @@ const AdminOrdersHome = ({ userEmail, authIdToken }) => {
 
     return (
         <div>
-            <h2 style={{ textAlign: 'center', backgroundColor:'aqua', margin:'10px',borderRadius:'5px' }}>All Orders</h2>
+            <h2 style={{ textAlign: 'center' }}>All Orders</h2>
             {orders.length === 0 ? (
                 <div>No orders found at thius time. Please try again after sometime.</div>
             ) : (
@@ -139,12 +139,12 @@ const AdminOrdersHome = ({ userEmail, authIdToken }) => {
                                     <option value="PLACED">PLACED</option>
                                     <option value="INTRANSIT">INTRANSIT</option>
                                     <option value="DELIVERED">DELIVERED</option>
-                                    <option value="CANCELLED">CANCELLED</option> {/* Add a CANCELLED option */}
+                                    <option value="CANCELLED">CANCELLED</option> 
                                 </select>
                                 </td>
-                                <td style={tableCellStyle}>{order.paymentId ? 'SUCCESS' : 'NA'}</td>
+                                <td style={tableCellStyle}>{order.orderPaymentId ? 'SUCCESS' : 'NA'}</td>
                                 <td style={tableCellStyle}>{order.orderAddress}</td>
-                                <td style={tableCellStyle}>{order.userEmail}</td>
+                                <td style={tableCellStyle}>{order.orderUserEmail}</td>
                                 <td style={tableCellStyle}>{order.orderedOn ? order.orderedOn.slice(0, 10) : 'NA'} (UTC)</td>
                                 <td style={tableCellStyle}>${order.orderTotalPrice}</td>
                                 <td style={tableCellStyle}>
@@ -166,22 +166,22 @@ const AdminOrdersHome = ({ userEmail, authIdToken }) => {
                                 <p ><strong>Status:</strong></p>
                                 <OrderStatus currentStatus={selectedOrder.status} />
                             </div >
-                            <p style={{marginTop:'40px'}}><strong>Payment Status:</strong> {selectedOrder.paymentId ? 'SUCCESS' : 'NA'}</p>
+                            <p style={{marginTop:'40px'}}><strong>Payment Status:</strong> {selectedOrder.orderPaymentId ? `SUCCESS(Id: ${selectedOrder.orderPaymentId})` : 'NA'}</p>
                             <p><strong>Delivery Address:</strong> {selectedOrder.orderAddress}</p>
                         </div>
                         <div className="cart-items">
                             {cartItems? cartItems.map((item, index) => (
                             <div key={index} className="cart-item">
                                 <div className="item-image">
-                                <img src={item.product.imageUrls} style={{ width: '100px', height: '100px' }} alt="Item" />
+                                <img src={item.carnivalProducts.imageUrls} style={{ width: '100px', height: '100px' }} alt="Item" />
                                 </div>
                                 <div className="item-details">
                                 <div className="item-info">
-                                    <span className="item-name" style={{ margin: '5px' }}>{item.product.name}</span>
+                                    <span className="item-name" style={{ margin: '5px' }}>{item.carnivalProducts.productName}</span>
                                 </div>
                                 <div className="item-quantity">
-                                    <span>Quantity: {item.quantity}x</span>${item.product.price}
-                                    <p>Total Price: <strong>${item.product.price * item.quantity}</strong></p>
+                                    <span>Quantity: {item.quantity}x</span>${item.carnivalProducts.productPrice}
+                                    <p>Total Price: <strong>${item.carnivalProducts.productPrice * item.cartItemQuantity}</strong></p>
                                 </div>
                                 </div>
                             </div>

@@ -5,7 +5,7 @@ import EditProduct from "./EdictProduct";
 import '../../Styles/AdminStyles/Spinner.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const ManageProducts = ({ authIdToken, userEmail }) => {
+const AdminProductsPage = ({ authIdToken, userEmail }) => {
   const [allProducts, setAllProducts] = useState([]);
   const [isAddProductPopupOpen, setIsAddProductPopupOpen] = useState(false);
   const [editProduct, setEditProduct] = useState(null);
@@ -81,38 +81,47 @@ const ManageProducts = ({ authIdToken, userEmail }) => {
         <button style={{marginRight:'20px'}} className="btn btn-primary mb-3" onClick={fetchAllProducts}>Fetch Products</button>
         <button className="btn btn-success mb-3 ml-3" onClick={openAddProductPopup}>Add New Product</button>
       </div>
-      <table className="table">
-        <thead className="thead-dark">
-          <tr>
-            <th>Item</th>
-            <th>Product Name</th>
-            <th>Category</th>
-            <th>Manufacturer</th>
-            <th>Price</th>
-            <th>Available</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {allProducts.map((product, index) => (
-            <tr key={product.id}>
-              <td><img src={product.imageUrls} width={100} height={100} alt={product.name}></img></td>
-              <td>{product.name}</td>
-              <td>{product.category}/{product.subcategory}</td>
-              <td>{product.manufacturer}</td>
-              <td>${product.price}</td>
-              <td>{product.quantityAvailable}</td>
-              <td>
-                <button className="btn btn-primary" onClick={() => openEditProductPopup(product)}>Edit</button>
-              </td>
+      {/* Conditional rendering to check if there are any products */}
+      {allProducts.length > 0 ? (
+        <table className="table">
+          <thead className="thead-dark">
+            <tr>
+              <th>Item</th>
+              <th>Product Name</th>
+              <th>Category</th>
+              <th>Manufacturer</th>
+              <th>Price</th>
+              <th>Available</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {allProducts.map((product, index) => (
+              <tr key={product.id}>
+                <td><img src={product.imageUrls} width={100} height={100} alt={product.name}></img></td>
+                <td>{product.productName}</td>
+                <td>{product.productCategory}</td>
+                <td>{product.productManufacturer}</td>
+                <td>${product.productPrice}</td>
+                <td>{product.productQuantityAvailable}</td>
+                <td>
+                  <button className="btn btn-primary" onClick={() => openEditProductPopup(product)}>Edit</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        // Display "No Products Found" message if the allProducts array is empty
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          <h4>No Products Found</h4>
+        </div>
+      )}
       {isAddProductPopupOpen && <AddProduct onClose={closeAddProductPopup} authIdToken={authIdToken} />}
       {editProduct && <EditProduct product={editProduct} onClose={closeEditProductPopup} authIdToken={authIdToken} />}
     </div>
   );
+
 }
 
-export default ManageProducts;
+export default AdminProductsPage;

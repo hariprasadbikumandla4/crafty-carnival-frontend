@@ -30,7 +30,7 @@ const ManageCategories = ({ userEmail, authIdToken }) => {
 
       const categoriesData = await response.json();
       // Sort categories alphabetically by name
-      const sortedCategories = categoriesData.sort((a, b) => a.name.localeCompare(b.name));
+      const sortedCategories = categoriesData.sort((a, b) => a.categoryName.localeCompare(b.categoryName));
       setCategories(sortedCategories);
     } catch (error) {
       handleAlert("Failed to fetch categories. Please try again later.", "danger");
@@ -63,7 +63,7 @@ const ManageCategories = ({ userEmail, authIdToken }) => {
           'Authorization':authIdToken
         },
         body: JSON.stringify({ 
-          name: newCategory 
+          categoryName: newCategory 
         }),
       });
 
@@ -95,7 +95,7 @@ const ManageCategories = ({ userEmail, authIdToken }) => {
         },
         body: JSON.stringify({ 
           id: editCategoryId, 
-          name: editedCategoryValue,
+          categoryName: editedCategoryValue,
           modifiedBy: userEmail  
         }),
       });
@@ -170,35 +170,41 @@ const ManageCategories = ({ userEmail, authIdToken }) => {
           </tr>
         </thead>
         <tbody>
-          {categories.map((category, index) => (
-            <tr key={category.id} className={index % 2 === 0 ? 'table-light' : 'table-blue'}>
-              <td>
-                {category.id === editCategoryId ? (
-                  <input
-                    type="text"
-                    value={editedCategoryValue}
-                    onChange={(e) => setEditedCategoryValue(e.target.value)}
-                    className="form-control"
-                  />
-                ) : (
-                  category.name
-                )}
-              </td>
-              <td>
-                {category.id === editCategoryId ? (
-                  <>
-                    <button onClick={handleUpdateCategory} className="btn btn-success mr-2">Save</button>
-                    <button onClick={() => setEditCategoryId(null)} className="btn btn-secondary">Cancel</button>
-                  </>
-                ) : (
-                  <>
-                    <button style={{marginRight:'20px'}} onClick={() => handleEditCategory(category.id, category.name)} className="btn btn-warning mr-2">Edit</button>
-                    <button onClick={() => handleDeleteCategory(category.id)} className="btn btn-danger">Delete</button>
-                  </>
-                )}
-              </td>
+          {categories.length > 0 ? (
+            categories.map((category, index) => (
+              <tr key={category.id} className={index % 2 === 0 ? 'table-light' : 'table-blue'}>
+                <td>
+                  {category.id === editCategoryId ? (
+                    <input
+                      type="text"
+                      value={editedCategoryValue}
+                      onChange={(e) => setEditedCategoryValue(e.target.value)}
+                      className="form-control"
+                    />
+                  ) : (
+                    category.categoryName
+                  )}
+                </td>
+                <td>
+                  {category.id === editCategoryId ? (
+                    <>
+                      <button onClick={handleUpdateCategory} className="btn btn-success mr-2">Save</button>
+                      <button onClick={() => setEditCategoryId(null)} className="btn btn-secondary">Cancel</button>
+                    </>
+                  ) : (
+                    <>
+                      <button style={{marginRight:'20px'}} onClick={() => handleEditCategory(category.id, category.categoryName)} className="btn btn-warning mr-2">Edit</button>
+                      <button onClick={() => handleDeleteCategory(category.id)} className="btn btn-danger">Delete</button>
+                    </>
+                  )}
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="2" className="text-center">No Categories Found</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>

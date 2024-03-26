@@ -5,7 +5,7 @@ import { AmplifyAuthenticator, AmplifySignIn, AmplifySignOut } from '@aws-amplif
 const AuthComponent = () => (
   <AmplifyAuthenticator>
     <div>
-      <h1>Crafty Carnival</h1>
+      <h1>My App</h1>
       <AmplifySignIn />
       <AmplifySignOut />
     </div>

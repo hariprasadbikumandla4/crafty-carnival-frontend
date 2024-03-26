@@ -20,8 +20,8 @@ const EditManufacturerForm = ({ manufacturer, onUpdate, onClose }) => {
             <input
               type="text"
               id="name"
-              value={editedManufacturer.name}
-              onChange={(e) => setEditedManufacturer({ ...editedManufacturer, name: e.target.value })}
+              value={editedManufacturer.manufacturerName}
+              onChange={(e) => setEditedManufacturer({ ...editedManufacturer, manufacturerName: e.target.value })}
               className="form-input"
               required
             />
@@ -31,8 +31,8 @@ const EditManufacturerForm = ({ manufacturer, onUpdate, onClose }) => {
             <input
               type="text"
               id="address"
-              value={editedManufacturer.address}
-              onChange={(e) => setEditedManufacturer({ ...editedManufacturer, address: e.target.value })}
+              value={editedManufacturer.manufacturerAddress}
+              onChange={(e) => setEditedManufacturer({ ...editedManufacturer, manufacturerAddress: e.target.value })}
               className="form-input"
               required
             />
@@ -42,8 +42,8 @@ const EditManufacturerForm = ({ manufacturer, onUpdate, onClose }) => {
             <input
               type="text"
               id="phone"
-              value={editedManufacturer.phone}
-              onChange={(e) => setEditedManufacturer({ ...editedManufacturer, phone: e.target.value })}
+              value={editedManufacturer.manufacturerPhone}
+              onChange={(e) => setEditedManufacturer({ ...editedManufacturer, manufacturerPhone: e.target.value })}
               className="form-input"
             />
           </div>
@@ -52,8 +52,8 @@ const EditManufacturerForm = ({ manufacturer, onUpdate, onClose }) => {
             <input
               type="email"
               id="email"
-              value={editedManufacturer.email}
-              onChange={(e) => setEditedManufacturer({ ...editedManufacturer, email: e.target.value })}
+              value={editedManufacturer.manufacturerEmail}
+              onChange={(e) => setEditedManufacturer({ ...editedManufacturer, manufacturerEmail: e.target.value })}
               className="form-input"
             />
           </div>
@@ -62,8 +62,8 @@ const EditManufacturerForm = ({ manufacturer, onUpdate, onClose }) => {
             <input
               type="text"
               id="website"
-              value={editedManufacturer.website}
-              onChange={(e) => setEditedManufacturer({ ...editedManufacturer, website: e.target.value })}
+              value={editedManufacturer.manufacturerWebsite}
+              onChange={(e) => setEditedManufacturer({ ...editedManufacturer, manufacturerWebsite: e.target.value })}
               className="form-input"
             />
           </div>
