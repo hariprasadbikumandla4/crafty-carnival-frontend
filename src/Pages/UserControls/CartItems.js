@@ -6,7 +6,7 @@ import CheckoutForm from "./CheckoutForm";
 import configDetails from "../../ConfigureDetails/redirectConfig";
 import '../../Styles/AdminStyles/Spinner.css';
 
-const stripePromise = loadStripe('pk_test_51OnwcNGMy5ZyUXeSrSWG3ytVYUx6qMm8568XrbFPSjwEO5uXwpt97DeXLVnD0Cyq2ivs1j8zGnVNcj0bvSARKrq100BBXTBu9v');
+const stripePromise = loadStripe('pk_test_51OyR5ZP1XLqnKKbgGXlqP1dbDrYKrj6dH2ci3bHJWqM4iwFThs67Vx9TeXEx9t1UcqSWKJkQfy24EmmxeViCPN0600hW8pGhNh');
 
 const CartItems = ({ userEmail, userName, userPhone, authIdToken }) => {
   const [userCartItems, setUserCartItems] = useState([]);
