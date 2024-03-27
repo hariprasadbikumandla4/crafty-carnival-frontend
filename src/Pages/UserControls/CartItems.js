@@ -16,6 +16,7 @@ const CartItems = ({ userEmail, userName, userPhone, authIdToken }) => {
 
   useEffect(() => {
     fetchCartItems();
+    console.log(authIdToken)
   }, [userEmail]);
 
   const fetchCartItems = async () => {

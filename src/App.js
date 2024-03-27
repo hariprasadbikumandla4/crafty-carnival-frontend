@@ -81,7 +81,7 @@ function App({ signOut, user }) {
             </Route>
             <Route path="/admin">
               {AdminUsers.usersList.includes(userEmail) ? (
-                <AdminHome userEmail={userEmail} />
+                <AdminHome userEmail={userEmail} authIdToken={authIdToken} />
               ) : (
                 <div className="centered-text">
                   <p>You don't have access to this page</p>
@@ -96,7 +96,7 @@ function App({ signOut, user }) {
             <Route path="/">
               <div className="centered-text">
                 <h2>Welcome to Crafty Carnival</h2>
-                <Home userEmail={userEmail}/>
+                <Home userEmail={userEmail} authIdToken={authIdToken}/>
               </div>
             </Route>
           </Switch>
