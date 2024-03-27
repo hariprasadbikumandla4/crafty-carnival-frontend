@@ -1,8 +1,8 @@
 //AWS END Point APIs
 
 const configDetails={
-    //baseUrl:"https://agg8enhzc4.execute-api.us-east-2.amazonaws.com/prod",
-    baseUrl:"http://localhost:8081",
+    baseUrl:"https://1her1p6suc.execute-api.us-east-2.amazonaws.com/dev",
+    //baseUrl:"http://localhost:8081",
     allCategories:"/allcategories",
     addCategory:"/addcategory",
     updateCategory:"/updatecategory",

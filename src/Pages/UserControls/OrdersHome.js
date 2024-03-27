@@ -126,16 +126,17 @@ const OrdersHome = ({ userEmail, authIdToken }) => {
                 <div className="popup">
                     <div className="popup-content">
                         <span className="close" onClick={closePopup}>&times;</span>
-                        <h3 style={{textAlign:'center', backgroundColor:'aqua'}}>Order Details</h3>
+                        <br/>
                         <div>
-                            <p><strong>Order ID:</strong> {selectedOrder.id} <strong>Ordered On:</strong> {selectedOrder.orderedOn ? selectedOrder.orderedOn.slice(0, 10) + " (UTC)" : 'NA'}</p>
+                            <p style={{textAlign:'left'}}><strong>Order ID:</strong> {selectedOrder.id} <strong>Ordered On:</strong> {selectedOrder.orderedOn ? selectedOrder.orderedOn.slice(0, 10) + " (UTC)" : 'NA'}</p>
                             <div style={{margin:'20px'}}>
-                                <p ><strong>Status:</strong></p>
+                                <p style={{textAlign:'left'}}><strong>Status:</strong></p>
                                 <OrderStatus currentStatus={selectedOrder.status} />
                             </div >
-                            <p style={{marginTop:'40px'}}><strong>Payment Status:</strong> {selectedOrder.orderPaymentId ? `SUCCESS(Id: ${selectedOrder.orderPaymentId})` : 'NA'}</p>
-                            <p><strong>Delivery Address:</strong> {selectedOrder.orderAddress}</p>
+                            <p style={{marginTop:'40px', textAlign:'left'}}><strong>Payment Status:</strong> {selectedOrder.orderPaymentId ? `SUCCESS(Id: ${selectedOrder.orderPaymentId})` : 'NA'}</p>
+                            <p style={{textAlign:'left'}}><strong>Delivery Address:</strong> {selectedOrder.orderAddress}</p>
                         </div>
+                        <br/>
                         <div className="cart-items">
                             {cartItems? cartItems.map((item, index) => (
                             <div key={index} className="cart-item">
@@ -144,11 +145,11 @@ const OrdersHome = ({ userEmail, authIdToken }) => {
                                 </div>
                                 <div className="item-details">
                                 <div className="item-info">
-                                    <span className="item-name" style={{ margin: '5px' }}>{item.carnivalProducts.productName}</span>
+                                    <span className="item-name" style={{ margin: '5px' }}><strong>Prodct: </strong>{item.carnivalProducts.productName}</span>
                                 </div>
-                                <div className="item-quantity">
-                                    <span>Quantity: {item.cartItemQuantity}x</span>${item.carnivalProducts.productPrice}
-                                    <p>Total Price: <strong>${item.carnivalProducts.productPrice * item.cartItemQuantity}</strong></p>
+                                <div className="item-quantity" style={{textAlign:'end'}}>
+                                    <span><strong>Quantity:</strong> {item.cartItemQuantity} x </span>${item.carnivalProducts.productPrice}
+                                    <p style={{textAlign:'end'}}><strong>Total Price:</strong> ${item.carnivalProducts.productPrice * item.cartItemQuantity}</p>
                                 </div>
                                 </div>
                             </div>

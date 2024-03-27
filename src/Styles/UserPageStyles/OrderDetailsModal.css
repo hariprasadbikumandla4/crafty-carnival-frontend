@@ -39,6 +39,7 @@
 
 .cart-item {
     display: flex;
+    background-color: #6a7;
     margin-bottom: 15px;
 }
 
