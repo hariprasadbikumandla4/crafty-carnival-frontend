@@ -45,7 +45,9 @@ function App({ signOut, user }) {
       <div className="container-fluid">
         <div className="header">
           <div className="logo">
-            <img src={Logo} width={400} height={150} alt="Crafty Carnival" />
+            <Link to="/">
+              <img src={Logo} width={400} height={150} alt="Crafty Carnival" />
+            </Link>
           </div>
           <div>
             <h3 style={{color:'red'}} >This is a Academic Project</h3>

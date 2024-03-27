@@ -219,7 +219,7 @@ const Home = ({ userEmail, authIdToken }) => {
       <aside className="filters" style={{ width: '15%', backgroundColor: 'lightgrey', padding: '10px', borderRadius: '10px' }}>
         <button onClick={fetchProducts} style={{width:'100%', marginBottom: '10px'}}>Fetch Products</button>
         <div style={{border: '1px solid', padding: '10px', borderRadius: '5px', margin:'5px' }}>
-            <strong>By Categories</strong>
+            <strong>By Categories</strong><br/>
             {Object.keys(categories).map((category) => (
               <div key={category} style={{ display: 'inline-block', marginRight: '10px' }}>
                 <input
@@ -234,7 +234,7 @@ const Home = ({ userEmail, authIdToken }) => {
             ))}
           </div>
         <div style={{border: '1px solid', padding: '10px', borderRadius: '5px' }}>
-          <strong> By Manufacturers</strong>
+          <strong> By Manufacturers</strong><br/>
           {Object.keys(manufacturers).map((manufacturer) => (
             <div key={manufacturer}>
               <input
