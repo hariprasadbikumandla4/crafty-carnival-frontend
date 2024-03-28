@@ -1,0 +1,18 @@
+/* Contact.css */
+
+.contact-container {
+  padding: 20px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-section {
+  margin-bottom: 20px;
+}
+
+.contact-section h3 {
+  margin-top: 0;
+}

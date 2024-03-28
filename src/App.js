@@ -15,6 +15,8 @@ import Home from './Pages/UserControls/Home';
 import Profile from './Pages/UserControls/Profile';
 import CartItems from './Pages/UserControls/CartItems';
 import OrdersHome from './Pages/UserControls/OrdersHome';
+import About from './Pages/UserControls/About';
+import Contact from './Pages/UserControls/Contact';
 
 Amplify.configure(config);
 
@@ -60,13 +62,15 @@ function App({ signOut, user }) {
         <div className="line"></div>
         <div className="navigation">
           <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/cart">Bucket</Link></li>
-            <li><Link to="/orders">Orders</Link></li>
-            <li><Link to="/profile">Profile</Link></li>
+            <li><Link to="/"><strong>Home</strong></Link></li>
+            <li><Link to="/cart"><strong>Bucket</strong></Link></li>
+            <li><Link to="/orders"><strong> Orders</strong></Link></li>
+            <li><Link to="/profile"><strong>Profile</strong></Link></li>
             {AdminUsers.usersList.includes(userEmail) && (
-              <li><Link to="/admin">Admin</Link></li>
+              <li><Link to="/admin"><strong>Admin</strong></Link></li>
             )}
+            <li><Link to="/contact"><strong> Contact</strong></Link></li>
+            <li><Link to="/about"><strong> About</strong></Link></li>
           </ul>
         </div>
         <div className="content">
@@ -93,6 +97,16 @@ function App({ signOut, user }) {
             <Route path="/cart">
               <div className="centered-text">
                 <CartItems authIdToken={authIdToken} userEmail={userEmail} userName={authUserName} userPhone={authPhone}/>
+              </div>
+            </Route>
+            <Route path="/about">
+              <div className="centered-text">
+                 <About />
+              </div>
+            </Route>
+            <Route path="/contact">
+              <div className="centered-text">
+                <Contact />
               </div>
             </Route>
             <Route path="/">
