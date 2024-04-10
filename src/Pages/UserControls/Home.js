@@ -48,10 +48,11 @@ const Home = ({ userEmail, authIdToken }) => {
       console.error('Error fetching data:', error);
     } finally {
       setIsLoading(false);
+      fetchCartItems(userEmail);
     }
   };
 
-  const fetchCartItems = async (userEmail) => {
+  const fetchCartItems = async () => {
     try {
       setIsLoading(true);
 
@@ -101,10 +102,13 @@ const Home = ({ userEmail, authIdToken }) => {
   const updateCartLocally = (fetchedExistingCart) => {
     const updatedCart = {};
     fetchedExistingCart.forEach((item) => {
-      updatedCart[item.product.id] = item.quantity;
+      if (item.carnivalProducts && item.carnivalProducts.id) {
+        updatedCart[item.carnivalProducts.id] = item.cartItemQuantity;
+      }
     });
     setCart(updatedCart);
   };
+
 
   const addToCart = async (productId, quantity, up) => {
     try {
@@ -128,11 +132,12 @@ const Home = ({ userEmail, authIdToken }) => {
       if (response.ok) {
         console.log('Item added to cart successfully');
         const updatedCart = [...existingCart];
-        const existingCartItemIndex = updatedCart.findIndex((item) => item.product.id === productId);
+        const existingCartItemIndex = updatedCart.findIndex((item) => item.product && item.product.id === productId); // Check if item.product is defined before accessing its properties
         if (existingCartItemIndex !== -1) {
           updatedCart[existingCartItemIndex].quantity += up;
         } else {
-          updatedCart.push({ product: products.find((product) => product.id === productId), quantity });
+          const newCartItem = { product: product, quantity };
+          updatedCart.push(newCartItem);
         }
         setExistingCart(updatedCart);
 
@@ -216,7 +221,7 @@ const Home = ({ userEmail, authIdToken }) => {
 
   return (
     <div className="main-container" style={{ display: 'flex' }}>
-      <aside className="filters" style={{ width: '15%', backgroundColor: 'lightgrey', padding: '10px', borderRadius: '10px' }}>
+      <aside className="filters" style={{ width: '15%', backgroundColor: 'lightgrey', padding: '5px', borderRadius: '10px' }}>
         <button onClick={fetchProducts} style={{width:'100%', marginBottom: '10px'}}>Fetch Products</button>
         <div style={{border: '1px solid', padding: '10px', borderRadius: '5px', margin:'5px' }}>
             <strong>By Categories</strong><br/>
@@ -249,8 +254,7 @@ const Home = ({ userEmail, authIdToken }) => {
         </div>
       </aside>
 
-      <div className="product-container" style={{ flex: 1, padding: '20px', margin: '0 20px' }}>
-      {/* Use a variable to hold the filtered products to avoid calling getFilteredProducts multiple times */}
+      <div className="product-container" style={{ flex: 1, padding: '10px', margin: '0 20px' }}>
       {(() => {
         const filteredProducts = getFilteredProducts();
         if (filteredProducts.length === 0) {
@@ -272,12 +276,12 @@ const Home = ({ userEmail, authIdToken }) => {
               <p>Price: ${product.productPrice}</p>
               {cart[product.id] > 0 ? (
                 <div className="quantity-controls">
-                  <button className="small-button" onClick={() => handleDecreaseQuantity(product.id)}>-</button>
+                  <button className="small-button" style={{width:'auto'}} onClick={() => handleDecreaseQuantity(product.id)}>-</button>
                   <span>{cart[product.id]}</span>
-                  <button className="small-button" onClick={() => handleIncreaseQuantity(product.id)}>+</button>
+                  <button className="small-button" style={{width:'auto'}} onClick={() => handleIncreaseQuantity(product.id)}>+</button>
                 </div>
               ) : (
-                <button className="add-to-cart-button" onClick={() => handleAddToCart(product.id)}>Add to Cart</button>
+                <button className="add-to-cart-button" style={{width:'auto'}} onClick={() => handleAddToCart(product.id)}>Add to Cart</button>
               )}
             </div>
           ));

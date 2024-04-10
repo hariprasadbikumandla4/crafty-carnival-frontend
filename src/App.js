@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { Amplify, Auth } from 'aws-amplify';
@@ -6,8 +5,8 @@ import { withAuthenticator } from '@aws-amplify/ui-react';
 import config from './amplifyconfiguration.json';
 import '@aws-amplify/ui-react/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "./App.css"
-import Logo from './Styles/logo.png'
+import "./App.css";
+import Logo from './Styles/logo.png';
 
 import AdminHome from './Pages/AdminControls/AdminHome';
 import AdminUsers from './ConfigureDetails/AdminUsers';
@@ -44,36 +43,35 @@ function App({ signOut, user }) {
 
   return (
     <Router>
-      <div className="container-fluid">
-        <div className="header">
-          <div className="logo">
-            <Link to="/">
-              <img src={Logo} width={400} height={150} alt="Crafty Carnival" />
-            </Link>
+      <div className="App">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <Link className="navbar-brand"  to="/">
+            <img src={Logo} width="150" height="80" alt="Crafty Carnival" />
+          </Link>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" style={{marginLeft:'10px', backgroundColor:'aliceblue'}} id="navbarNav">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/cart">Bucket</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/orders">Orders</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/profile">Profile</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/contact">Contact</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
+              {AdminUsers.usersList.includes(userEmail) && (
+                <li className="nav-item"><Link className="nav-link" to="/admin">Admin</Link></li>
+              )}
+            </ul>
           </div>
-          <div>
-            <h3 style={{color:'red'}} >This is a Academic Project</h3>
+          <div className="d-flex justify-content-end">
+              <span className="navbar-text mr-3" style={{marginRight:'10px'}}>
+                {userEmail}
+              </span>
+              <button className="btn btn-outline-danger" style={{marginRight:'10px'}} onClick={signOut}>Sign out</button>
           </div>
-          <div className="user-profile">
-            <span className="user-email">{userEmail}</span>
-            <button className="btn sign-out-btn" onClick={signOut}>Sign out</button>
-          </div>
-        </div>
-        <div className="line"></div>
-        <div className="navigation">
-          <ul>
-            <li><Link to="/"><strong>Home</strong></Link></li>
-            <li><Link to="/cart"><strong>Bucket</strong></Link></li>
-            <li><Link to="/orders"><strong> Orders</strong></Link></li>
-            <li><Link to="/profile"><strong>Profile</strong></Link></li>
-            {AdminUsers.usersList.includes(userEmail) && (
-              <li><Link to="/admin"><strong>Admin</strong></Link></li>
-            )}
-            <li><Link to="/contact"><strong> Contact</strong></Link></li>
-            <li><Link to="/about"><strong> About</strong></Link></li>
-          </ul>
-        </div>
-        <div className="content">
+        </nav>        
+        <div className="container mt-3">
           <Switch>
             <Route path="/orders">
               <div className="centered-text">

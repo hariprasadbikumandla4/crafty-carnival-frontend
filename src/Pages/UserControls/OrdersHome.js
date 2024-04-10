@@ -93,7 +93,7 @@ const OrdersHome = ({ userEmail, authIdToken }) => {
             {orders.length === 0 ? (
                 <div>No orders found at this time. Please try again after sometime.</div>
             ) : (
-                <table style={{ margin: '20px' }}>
+                <table style={{ margin: '5px' }}>
                     <thead>
                         <tr>
                             <th style={tableHeaderStyle}>Order ID</th>
