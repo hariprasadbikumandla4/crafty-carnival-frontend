@@ -46,21 +46,21 @@ function App({ signOut, user }) {
       <div className="App">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <Link className="navbar-brand"  to="/">
-            <img src={Logo} width="150" height="80" alt="Crafty Carnival" />
+            <img src={Logo} width="150" height="100" alt="Crafty Carnival" />
           </Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" style={{marginLeft:'10px', backgroundColor:'aliceblue'}} id="navbarNav">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/cart">Bucket</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/orders">Orders</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/profile">Profile</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/contact">Contact</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/"><strong>Home</strong></Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/cart"><strong>Bucket</strong></Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/orders"><strong>Orders</strong></Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/profile"><strong>Profile</strong></Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/contact"><strong>Contact</strong></Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/about"><strong>About</strong></Link></li>
               {AdminUsers.usersList.includes(userEmail) && (
-                <li className="nav-item"><Link className="nav-link" to="/admin">Admin</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="/admin"><strong>Admin</strong></Link></li>
               )}
             </ul>
           </div>

@@ -130,7 +130,7 @@ const OrdersHome = ({ userEmail, authIdToken }) => {
                         <div>
                             <p style={{textAlign:'left'}}><strong>Order ID:</strong> {selectedOrder.id} <strong>Ordered On:</strong> {selectedOrder.orderedOn ? selectedOrder.orderedOn.slice(0, 10) + " (UTC)" : 'NA'}</p>
                             <div style={{margin:'20px'}}>
-                                <p style={{textAlign:'left'}}><strong>Status:</strong></p>
+                                <p style={{textAlign:'left'}}><strong>Status:{selectedOrder.status}</strong></p>
                                 <OrderStatus currentStatus={selectedOrder.status} />
                             </div >
                             <p style={{marginTop:'40px', textAlign:'left'}}><strong>Payment Status:</strong> {selectedOrder.orderPaymentId ? `SUCCESS(Id: ${selectedOrder.orderPaymentId})` : 'NA'}</p>
